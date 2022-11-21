@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @Description :
  */
 public class ThreadPoll1 {
-
+    private static int a = 1;
 
     public static class ThreadPoolTest implements Runnable {
 
@@ -24,7 +24,9 @@ public class ThreadPoll1 {
         @Override
         public void run() {
             try {
+                ++a;
                 System.out.println(Thread.currentThread().getName());
+                System.out.println("a =="+a);
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -41,10 +43,11 @@ public class ThreadPoll1 {
 
 
         ThreadPoolExecutor nameThreadPool =
-                new ThreadPoolExecutor(5, 10, 60, TimeUnit.SECONDS, queue, new NameThreadFactory("wanglj线程池"), handler);
+                new ThreadPoolExecutor(5, 10, 60, TimeUnit.SECONDS, queue,
+                        new NameThreadFactory("wanglj线程池"), handler);
 
         //threadPool.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 10; i++) {
             nameThreadPool.execute(
                     new Thread(new ThreadPoolTest(i), "Thread".concat(i + "")));
             //System.out.println("线程池中活跃的线程数： " + threadPool.getPoolSize());
