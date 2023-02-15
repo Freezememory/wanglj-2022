@@ -9,7 +9,10 @@ import java.util.concurrent.*;
  * @Description :
  */
 public class BlockQueue {
-    ArrayBlockingQueue<String> arrayBlockingQueue =  new ArrayBlockingQueue<String>(10);
+  private  static   ArrayBlockingQueue<String> arrayBlockingQueue =  new ArrayBlockingQueue<String>(3);
+
+
+
 
    private static final LinkedBlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<Runnable>(5);
 
@@ -20,4 +23,23 @@ public class BlockQueue {
     //LinkedTransferQueue<String> linkedTransferQueue =  new LinkedTransferQueue<String>(10);
     //SynchronousQueue<String> synchronousQueue =  new LinkedTransferQueue<String>(10);
     LinkedBlockingDeque<String> linkedBlockingDeque =  new LinkedBlockingDeque<String>(10);
+
+    public static void main(String[] args) throws InterruptedException {
+        arrayBlockingQueue.put("w");
+        arrayBlockingQueue.put("a");
+        arrayBlockingQueue.put("n");
+        //arrayBlockingQueue.put("g");
+        //System.out.println(arrayBlockingQueue.offer("a"));
+        //System.out.println(arrayBlockingQueue.offer("n"));
+        //System.out.println(arrayBlockingQueue.offer("g"));
+        //arrayBlockingQueue.add("g");
+        //System.out.println(arrayBlockingQueue.peek());
+
+        System.out.println(arrayBlockingQueue.take());
+        System.out.println(arrayBlockingQueue.take());
+        System.out.println(arrayBlockingQueue.size());
+        System.out.println(arrayBlockingQueue.take());
+        //System.out.println(arrayBlockingQueue.take());
+        //System.out.println(arrayBlockingQueue.remove());
+    }
 }
