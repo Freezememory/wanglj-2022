@@ -56,7 +56,6 @@ public class OCRTest {
         System.out.println(base64String);*/
        // System.out.println(URLEncoder.encode(base64String, "utf-8"));
 
-
         //File file = new File(strUrl);
         //String base64String = getBase64String(file);
 
