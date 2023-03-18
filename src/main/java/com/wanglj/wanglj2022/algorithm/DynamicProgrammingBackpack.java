@@ -3,12 +3,12 @@ package com.wanglj.wanglj2022.algorithm;
 public class DynamicProgrammingBackpack {
     public static void main(String[] args) {
         //物品价值,重量,和背包承重
-        int v[] = {0, 8, 10, 6, 3, 7, 2};
-        int w[] = {0, 4, 6, 2, 2, 5, 1};
+        int[] v = {0, 8, 10, 6, 3, 7, 2};
+        int[] w = {0, 4, 6, 2, 2, 5, 1};
         int c = 12;
 
         //定义二位数组动态规划背包价值和重量
-        int m[][] = new int[v.length][c + 1];
+        int[][] m = new int[v.length][c + 1];
         for (int i = 1; i < v.length; i++) {
             for (int j = 1; j <= c; j++) {
                 if (j >= w[i])
