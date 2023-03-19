@@ -12,7 +12,7 @@ public class DynamicProgrammingBackpack {
         for (int i = 1; i < v.length; i++) {
             for (int j = 1; j <= c; j++) {
                 if (j >= w[i])
-                    m[i][j] = m[i - 1][j - w[i]] + v[i] > m[i - 1][j] ? m[i - 1][j - w[i]] + v[i] : m[i - 1][j];
+                    m[i][j] = Math.max(m[i - 1][j - w[i]] + v[i], m[i - 1][j]);
                 else
                     m[i][j] = m[i - 1][j];
             }
