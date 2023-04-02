@@ -1,18 +1,11 @@
 package com.wanglj.wanglj2022.algorithm;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BucketSort {
 
-    public static void main(String[] args) {
-        //int[] arr = {1,2,6,9,10,1,4,3,2};
-        List<Integer> integerList = Arrays.asList(1, 2, 6, 9, 10, 1, 4, 3, 2);
-        List<Integer> bucketSort = bucketSort(integerList, 8);
-        System.out.println(bucketSort);
-    }
-    private static List<Integer> bucketSort(List<Integer> arr, int bucketSize) {
+    public static List<Integer> bucketSort(List<Integer> arr, int bucketSize) {
         int len = arr.size();
         if (len < 2 || bucketSize == 0) {
             return arr;

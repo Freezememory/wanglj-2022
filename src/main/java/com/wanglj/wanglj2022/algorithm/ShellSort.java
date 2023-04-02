@@ -1,15 +1,6 @@
 package com.wanglj.wanglj2022.algorithm;
 
-import java.util.Arrays;
-
 public class ShellSort {
-
-
-    public static void main(String[] args) {
-        int[] arr = {1,2,6,9,10,1,4,3,2};
-        shellSort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
 
     public static void shellSort(int[] arr) {
         int len = arr.length, tmp, j;

@@ -1,14 +1,6 @@
 package com.wanglj.wanglj2022.algorithm;
 
-import java.util.Arrays;
-
 public class HeapSort {
-
-    public static void main(String[] args) {
-        int[] arr = {1,2,6,9,10,1,4,3,2};
-        heapSort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
     private static int heapLen;
 
     public static void heapSort(int[] arr) {

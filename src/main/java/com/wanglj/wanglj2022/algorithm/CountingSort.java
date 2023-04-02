@@ -1,14 +1,6 @@
 package com.wanglj.wanglj2022.algorithm;
 
-import java.util.Arrays;
-
 public class CountingSort {
-
-    public static void main(String[] args) {
-        int[] arr = {1,2,6,9,10,1,4,3,2};
-        countingSort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
 
     public static void countingSort(int[] arr) {
         int len = arr.length;

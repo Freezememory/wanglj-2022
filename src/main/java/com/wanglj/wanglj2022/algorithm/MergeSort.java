@@ -4,17 +4,11 @@ import java.util.Arrays;
 
 public class MergeSort {
 
-    public static void main(String[] args) {
-        int[] arr = {1,2,6,9,10,1,4,3,2};
-        int[] ints = mergeSort(arr);
-        System.out.println(Arrays.toString(ints));
-    }
     public static int[] mergeSort(int[] arr) {
         int len = arr.length;
         if (len < 2) {
             return arr;
         }
-
         int mdlIdx = len / 2;
         int[] arrLeft = Arrays.copyOfRange(arr, 0, mdlIdx);
         int[] arrRight = Arrays.copyOfRange(arr, mdlIdx, len);

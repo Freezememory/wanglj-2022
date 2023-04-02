@@ -1,18 +1,11 @@
 package com.wanglj.wanglj2022.algorithm;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //基数排序
 public class RadixSort {
 
-
-    public static void main(String[] args) {
-        int[] arr = {1,2,6,9,10,1,4,3,2};
-        radixSort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
     public static void radixSort(int[] arr) {
         if (arr.length < 2) return;
         int maxVal = arr[0];//求出最大值
