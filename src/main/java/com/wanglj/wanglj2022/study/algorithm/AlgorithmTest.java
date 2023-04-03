@@ -22,7 +22,11 @@ public class AlgorithmTest {
         //RadixSort.radixSort(arr);
         //SelectionSort.selectionSort(arr);
         //ShellSort.shellSort(arr);
-        System.out.println(Arrays.toString(arr));
+        //System.out.println(Arrays.toString(arr));
+
+
+        int index = BinarySearch.binarySearch(arr, 1);
+        System.out.println(index);
     }
 
 }
