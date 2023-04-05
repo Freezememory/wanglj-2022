@@ -26,7 +26,7 @@ public class ThreadPoll1 {
             try {
                 ++a;
                 System.out.println(Thread.currentThread().getName());
-                System.out.println("a =="+a);
+                System.out.println("a ==" + a);
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -20,22 +20,17 @@ public class SynchronizedDemo {
 
 
     public static void main(String[] args) {
-
         for (int i = 0; i < 3; i++) {
             AccountSync accountSync = new AccountSync();
             threadPool.execute(accountSync);
         }
-
-
         //Thread thread1 = new Thread(accountSync);
         //Thread thread2 = new Thread(accountSync);
         //thread1.start();
         //thread2.start();
     }
 
-
     static class AccountSync implements Runnable {
-
         int i = 0;
 
         public  void increase() throws InterruptedException {
@@ -43,7 +38,6 @@ public class SynchronizedDemo {
             Thread.sleep(300);
             System.out.println(Thread.currentThread().getName() + "增加了i值，它的值为 " + i);
         }
-
         @Override
         public void run() {
             for (int j = 0; j < 100; j++) {
