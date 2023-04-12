@@ -16,4 +16,5 @@ public class ChinaCoffeeFactory  extends CoffeeFactory {
     public Coffee[] createCoffee() {
         return new Coffee[]{new Cappuccino(),new Latte()};
     }
+
 }

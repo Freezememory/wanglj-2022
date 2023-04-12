@@ -9,7 +9,6 @@ import com.wanglj.wanglj2022.study.factory.Coffee;
  */
 public class FactoryMethodTest {
 
-
     public static void main(String[] args) {
 
 
@@ -35,4 +34,5 @@ public class FactoryMethodTest {
             System.out.println(coffee.getName());
         }
     }
+
 }

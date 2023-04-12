@@ -8,4 +8,5 @@ package com.wanglj.wanglj2022.study.factory;
 public abstract class Drink {
 
     public abstract String getName();
+
 }

@@ -7,7 +7,6 @@ package com.wanglj.wanglj2022.study.factory;
  */
 public abstract class Tea extends Drink{
 
-
-
     //public abstract String getName();
+
 }

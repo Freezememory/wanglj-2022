@@ -9,7 +9,6 @@ import com.wanglj.wanglj2022.study.factory.Coffee;
  */
 public abstract class CoffeeFactory {
 
-
-
     public abstract Coffee[] createCoffee();
+
 }

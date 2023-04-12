@@ -12,7 +12,6 @@ import com.wanglj.wanglj2022.study.factory.Latte;
  */
 public class SimpleFactory {
 
-
     public static Coffee createInstance(String type) {
 
         if ("Americano".equals(type)) {
@@ -34,4 +33,5 @@ public class SimpleFactory {
         Coffee americano = SimpleFactory.createInstance("Americano");
         System.out.println(americano.getName());
     }
+
 }
