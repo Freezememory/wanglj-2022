@@ -14,13 +14,13 @@ public class Singleton {
         instance = new Singleton();
     }*/
 
-   /* private static final Singleton instance = new Singleton();
+   /*private static final Singleton instance = new Singleton();
       public static Singleton getInstance() {
         return instance;
       }*/
 
 
-    /* private static class SingletonInstance{
+    /*private static class SingletonInstance{
         private final static Singleton INSTANCE = new Singleton();
       }
 
