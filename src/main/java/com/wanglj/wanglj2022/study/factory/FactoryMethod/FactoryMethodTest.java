@@ -14,13 +14,13 @@ public class FactoryMethodTest {
 
         Coffee[] chinaCoffees = chinaCoffeeFactory.createCoffee();
         System.out.println("中国工厂生产的咖啡种类：   ");
-        print(chinaCoffees);
+        //print(chinaCoffees);
 
         AmericaCoffeeFactory americaCoffeeFactory = new AmericaCoffeeFactory();
 
         Coffee[] americaCoffees = americaCoffeeFactory.createCoffee();
         System.out.println("美国工厂生产的咖啡种类：   ");
-        print(americaCoffees);
+        //print(americaCoffees);
     }
 
 /*    static void print(Coffee[] c){
