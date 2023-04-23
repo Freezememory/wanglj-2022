@@ -9,9 +9,7 @@ public class Test {
 
 
     @org.junit.jupiter.api.Test
-    void contextLoads() throws Exception {
-        //String s = ocrTest.encodeBase64File("C:\\Users\\11525\\Pictures\\my\\xinshicard.png");
-        //System.out.println(s);
+    void contextLoads(){
         System.out.println(getAge(8));
     }
 
