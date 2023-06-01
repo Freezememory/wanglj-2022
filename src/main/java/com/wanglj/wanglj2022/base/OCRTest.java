@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
+//import com.sun.org.apache.xml.internal.security.utils.Base64;
 /**
  * @Author: Wanglj
  * @Date: 2022/10/13 22:49
@@ -21,39 +21,45 @@ import com.sun.org.apache.xml.internal.security.utils.Base64;
 @Component
 public class OCRTest {
 
-        /*
     public static void main(String[] args) {
         String strUrl = "";
         //String strFilep = "E://mnt//hgfs//LinuxTestPic//21//002003.jpg";
-        String strFilep = "C:\\Users\\11525\\Pictures\\my\\xinshicard.png";
+        String strFilep = "C:\\Users\\11525\\Pictures\\xsz\\123.jpg";
         String strpid = "2";//pid
         File file = new File(strFilep);
         FileInputStream is;
+
         try {
-            is = new FileInputStream(file);
+/*            is = new FileInputStream(file);
             byte[] data = new byte[is.available()];
             is.read(data);
-            String base64file = Base64.encode(data);
+            String base64file = Base64.encode(data);*/
 
-            String params = "filedata=" + URLEncoder.encode(base64file, "utf-8");
-            params += "&pid=" + URLEncoder.encode(strpid, "utf-8");
-            JSONObject object = readByPOST(strUrl, params);
-            System.out.println(object.toJSONString());
+            //获取OCR识别图片base64编码
+            String base64FileString = FileBase64.encodeBase64File(strFilep);
+            //参数拼接
+            String params = "filedata=" + URLEncoder.encode(base64FileString, "utf-8");
+            params += "&pid=" + URLEncoder.encode("5", "utf-8");
+
+            System.out.println(params);
+            //JSONObject object = readByPOST(strUrl, params);
+            //System.out.println(object.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
-*/
 
-    public static void main(String[] args) throws Exception {
+/*    public static void main(String[] args) throws Exception {
         //String strUrl = "C:\\Users\\11525\\Pictures\\my\\jiashicard.jpg";
         String strUrl = "C:\\Users\\11525\\Pictures\\my\\xinshicard.png";
-/*        File file = new File(strUrl);
+*//*        File file = new File(strUrl);
         InputStream inputStream = new FileInputStream(file);
         MultipartFile multipartFile = new MockMultipartFile(file.getName(), inputStream);
         String base64String = getBase64String(multipartFile);
-        System.out.println(base64String);*/
+        System.out.println(base64String);*//*
        // System.out.println(URLEncoder.encode(base64String, "utf-8"));
 
         //File file = new File(strUrl);
@@ -66,7 +72,7 @@ public class OCRTest {
         //System.out.println(base64file);
         System.out.println(encode);
         //System.out.println(URLEncoder.encode("5", "utf-8"));
-    }
+    }*/
 
     /**
      * <p>将文件转成base64 字符串</p>
@@ -102,7 +108,7 @@ public class OCRTest {
         return base64EncoderImg;
     }*/
 
-    public static   String getBase64String(File ocrFile) {
+/*    public static   String getBase64String(File ocrFile) {
         FileInputStream is = null;
         String base64EncoderImg = "";
         try {
@@ -122,7 +128,7 @@ public class OCRTest {
             }
         }
         return base64EncoderImg;
-    }
+    }*/
 
 /*
     public static void main(String[] args) {
