@@ -1,6 +1,6 @@
-package com.wanglj.wanglj2022.chinesePlate.pai.utl;
+package com.wanglj.wanglj2022.chinesePlate.client.utl;
 
-import com.wanglj.wanglj2022.chinesePlate.pai.model.PokerLabel;
+import com.wanglj.wanglj2022.chinesePlate.client.model.PokerLabel;
 
 import java.util.ArrayList;
 import java.util.Collections;

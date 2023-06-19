@@ -1,4 +1,4 @@
-package com.wanglj.wanglj2022.chinesePlate.pai.thread;
+package com.wanglj.wanglj2022.chinesePlate.client.thread;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

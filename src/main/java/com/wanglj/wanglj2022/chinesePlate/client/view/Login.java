@@ -1,4 +1,4 @@
-package com.wanglj.wanglj2022.chinesePlate.pai.view;
+package com.wanglj.wanglj2022.chinesePlate.client.view;
 
 
 import java.awt.GridLayout;

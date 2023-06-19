@@ -1,4 +1,4 @@
-package com.wanglj.wanglj2022.chinesePlate.paipai.view;
+package com.wanglj.wanglj2022.chinesePlate.server.view;
 
 public class Main {
 

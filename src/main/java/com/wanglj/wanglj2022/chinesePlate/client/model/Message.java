@@ -1,4 +1,4 @@
-package com.wanglj.wanglj2022.chinesePlate.pai.model;
+package com.wanglj.wanglj2022.chinesePlate.client.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

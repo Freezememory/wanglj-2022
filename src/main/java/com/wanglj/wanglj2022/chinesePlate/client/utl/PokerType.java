@@ -1,4 +1,4 @@
-package com.wanglj.wanglj2022.chinesePlate.pai.utl;
+package com.wanglj.wanglj2022.chinesePlate.client.utl;
 
 public enum PokerType {
 
