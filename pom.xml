@@ -132,12 +132,35 @@
             <version>6.0-1.5.9</version>
             <classifier>linux-x86_64</classifier>
         </dependency>
-
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.11</version>
+        </dependency>
 
         <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>javacv</artifactId>
             <version>1.5.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gexin.platform</groupId>
+            <artifactId>gexin-rp-fastjson</artifactId>
+            <version>1.0.0.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.netbeans.external/jakarta-oro-2.0.8 -->
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>jakarta-oro-2.0.8</artifactId>
+            <version>RELEASE69</version>
         </dependency>
     </dependencies>
 
