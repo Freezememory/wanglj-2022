@@ -38,7 +38,7 @@ public class ForwardController {
         try {
             String token = IdUtil.fastUUID();
             String state = "101000004071";
-            return "redirect:https://jjz.jtgl.beijing.gov.cn/login_tyrz.html?code=" + token + "&state=" + state;
+            return "redirect:https://xxx.xxx.cn/login_tyrz.html?code=" + token + "&state=" + state;
         } catch (Exception e) {
             log.error("统一认证登录异常: ", e);
         }
