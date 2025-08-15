@@ -27,6 +27,8 @@ public class AlgorithmTest {
 
         int index = BinarySearch.binarySearch(arr, 1);
         System.out.println(index);
+
+        
     }
 
 }
