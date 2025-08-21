@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class IndicatorExcelParser {
+public class IndicatorUpdateExcelParser {
 
     // 最终解析结果
     private final List<Indicator> result = new ArrayList<>();
@@ -38,6 +38,7 @@ public class IndicatorExcelParser {
     private static final String codeJsonPath = "E:\\WorkFiles\\2019_广州\\2025_江门医院\\第三章建表\\第三章分类代码.json";
 
     private static final String result_detail_update_path = "E:\\WorkFiles\\2019_广州\\2025_江门医院\\第三章建表\\result_detail_update.sql";
+    private static final String common_result_detail_update_path = "E:\\WorkFiles\\2019_广州\\2025_江门医院\\第三章建表\\common_result_detail_update.sql";
 
     private final Map<String, Integer> itemMap = new HashMap<>();
 
@@ -45,26 +46,12 @@ public class IndicatorExcelParser {
 
     private final List<String> commonTableList = new ArrayList<>();
 
-
-    private static final String sqlFormat = "{\n" +
-            "  \"layerId\": \"1934450759259664390\",\n" +
-            "  \"firstTheme\": \"1950030402880557058\",\n" +
-            "  \"secondTheme\": \"{}\",\n" +
-            "  \"upgradeFlag\": \"_full\",\n" +
-            "  \"upgradeFrequency\": \"_daily\",\n" +
-            "  \"sdsStandard\": 0,\n" +
-            "  \"sql\": \"CREATE TABLE `{}` (\\n\\t`business_dt` INT NULL COMMENT \\\"业务时间yyyy/yyyymm/yyyyqq/yyyymmdd\\\",\\n\\t`dim_type` VARCHAR(50) NULL COMMENT \\\"维度类型(科室/专业组/全科室)\\\",\\n\\t`dept_code` VARCHAR(128) NULL COMMENT \\\"科室编码\\\",\\n\\t`spec_doct_code` VARCHAR(128) NULL DEFAULT \\\"0\\\" COMMENT \\\"专业组代码\\\",\\n\\t`business_dt_type` VARCHAR(128) NULL COMMENT \\\"业务时间类型(日/月/季/半年/年/月(26~25)/年(26~25)/季(26~25)/半年(26~25))\\\" ,\\n\\t`dept_name` VARCHAR(255) NULL COMMENT \\\"科室名称\\\",\\n\\t`spec_doct_name` VARCHAR(128) NULL DEFAULT \\\"0\\\" COMMENT \\\"专业组名称\\\",\\n\\t`label_result` DECIMAL(20,2) NULL COMMENT \\\"结果值\\\",\\n\\t`tb_value` DECIMAL(20,2) NULL COMMENT \\\"同比分析\\\",\\n\\t`hb_value` DECIMAL(20,2) NULL COMMENT \\\"环比分析\\\",\\n\\t`create_by` VARCHAR(32) NULL COMMENT \\\"创建人\\\",\\n\\t`create_time` DATETIME NULL COMMENT \\\"创建时间\\\",\\n\\t`update_by` VARCHAR(32) NULL COMMENT \\\"最后更新人\\\",\\n\\t`update_time` DATETIME NULL COMMENT \\\"最后更新时间\\\",\\n\\t`theme_code` VARCHAR(500) NULL COMMENT \\\"主题编码(指标编码)\\\",\\n\\t`theme_name` VARCHAR(500) NULL COMMENT \\\"主题名称(指标名称)\\\",\\n\\t`sjtjsj` DATETIME NULL COMMENT \\\"数据统计时间\\\"\\n) ENGINE=OLAP\\nUNIQUE KEY(business_dt,\\n  dim_type,\\n  dept_code,\\n  spec_doct_code,\\n  business_dt_type)\\nCOMMENT \\\"{}\\\"\\nDISTRIBUTED BY HASH(business_dt,\\n  dim_type,\\n  dept_code,\\n  spec_doct_code,\\n  business_dt_type) BUCKETS 8 ;\",\n" +
-            "  \"datasourceType\": \"14\",\n" +
-            "  \"datasourceId\": \"1934450975773831170\",\n" +
-            "  \"fullNameFormat\": \"ads_GA03_{}_%s_full_daily\"\n" +
-            "}";
-
-
-    // private static final String sqlFormat = "\n\n create table    `{}`  ()   comment \"{}\" ";
-
     public static void main(String[] args) {
-        IndicatorExcelParser indicatorExcelParser = new IndicatorExcelParser();
+        IndicatorUpdateExcelParser indicatorExcelParser = new IndicatorUpdateExcelParser();
         indicatorExcelParser.readExcel();
+
+        System.out.println("同期 ICU 患者血管导管累计使用天数".replace(" ", ""));
+
     }
 
     public void readExcel() {
@@ -81,37 +68,29 @@ public class IndicatorExcelParser {
         for (ExcelData excelData : dataList) {
             String dataRule = excelData.getDataRule();
             boolean filterStatus = StrUtil.isBlank(dataRule) || dataRule.contains("人工") || dataRule.contains("抽样");
-            // boolean filterStatus = codeStatus || dataRuleStatus;
             log.info("数据库规则: {}  , 是否过滤: {} ", dataRule, filterStatus);
             if (!filterStatus) {
                 this.invoke(excelData);
             }
+
         }
         log.info("过滤后结果行数 : {} 行", result.size());
 
-        this.createFile(-1, commonFilePath);
-        this.createFile(-2, tableFilePath);
-        this.createFile(-3, result_detail_update_path);
+        // this.createFile(-3, result_detail_update_path);
+        this.createFile(-4, common_result_detail_update_path);
 
         HashMap<Integer, JSONObject> codeJsonList = this.getCodeJsonList();
         // 打印解析结果
         for (Indicator indicator : result) {
             String indicatorCode = indicator.getIndicatorCode();
-
             String[] split = indicatorCode.split("\\.");
             Integer order = Integer.parseInt(split[1]);
-            /*if (order < 6) {
+            if (order < 6) {
                 continue;
-            }
-*/
-            String orderFilePath = StrUtil.format(filePath, order);
-            if (ObjectUtil.isNull(fileMap) || ObjectUtil.isNull(fileMap.get(order)) || !fileMap.get(order)) {
-                this.createFile(order, orderFilePath);
             }
 
             JSONObject jsonObject = codeJsonList.get(order);
 
-            String id = jsonObject.getStr("id");
             String code = jsonObject.getStr("code");
 
             String num = indicatorCode.substring(indicatorCode.lastIndexOf(".") + 1);
@@ -120,7 +99,7 @@ public class IndicatorExcelParser {
             log.info("指标编号: {}  ,指标名称: {} ", indicator.getIndicatorCode(), indicator.getIndicatorName());
             for (int i = 0; i < indicator.getDataItems().size(); i++) {
                 Indicator.DataItem item = indicator.getDataItems().get(i);
-                String dataItem = item.getDescription();
+                String dataItem = item.getDescription().replace(" ", "");
 
                 if (itemMap.get(dataItem) > 1) {
                     if (!commonTableList.contains(dataItem)) {
@@ -128,17 +107,13 @@ public class IndicatorExcelParser {
                             FileUtil.mkdir(commonFilePath);
                         }
                         String tableName = "comm_" + String.format("%03d", commonTableList.size() + 1) + code.toLowerCase();
-                        String name = "通用_" + dataItem + ",通用次数:" + itemMap.get(dataItem);
-                        String createBody = StrUtil.format(PostManJsonFormat.bodyFormat, id, tableName, "通用_" + dataItem, code);
-                        // String createBody = StrUtil.format(sqlFormat, id, tableName, "通用_" + dataItem, code);
                         String tableFullName = ("ads_ga03_" + code + "_" + tableName + "_full_daily").toLowerCase();
-                        String tableRel = dataItem + "\t" + tableFullName + "\n";
+                        String detailTableFullName = tableFullName.replace("_full_daily", "detail_full_daily");
 
-                        String jsonFormat = StrUtil.format(PostManJsonFormat.jsonFormat, name, createBody);
+                        String updateSqlStr = StrUtil.format(PostManJsonFormat.updateSqlFormat, tableFullName, detailTableFullName, dataItem);
                         try {
-                            Files.write(Paths.get(commonFilePath), jsonFormat.getBytes(), StandardOpenOption.APPEND);
+                            Files.write(Paths.get(common_result_detail_update_path), updateSqlStr.getBytes(), StandardOpenOption.APPEND);
 
-                            Files.write(Paths.get(tableFilePath), tableRel.getBytes(), StandardOpenOption.APPEND);
                         } catch (IOException e) {
                             log.error("追加内容时出错: ", e);
                         }
@@ -155,18 +130,15 @@ public class IndicatorExcelParser {
                 }
                 log.info("  数据项  - " + dataItem);
                 String tableFullName = ("ads_ga03_" + code + "_" + tableName + "_full_daily").toLowerCase();
-                String tableRel = dataItem + "\t" + tableFullName + "\n";
+                String detailTableFullName = tableFullName.replace("count", "detail");
 
-                String createBody = StrUtil.format(PostManJsonFormat.bodyFormat, id, tableName, dataItem, code);
-                // String createBody = StrUtil.format(sqlFormat, id, tableName, dataItem, code);
-                String jsonFormat = StrUtil.format(PostManJsonFormat.jsonFormat, tableName, createBody);
+                String updateSqlStr = StrUtil.format(PostManJsonFormat.updateSqlFormat, tableFullName, detailTableFullName, dataItem);
 
-                try {
-                    Files.write(Paths.get(orderFilePath), jsonFormat.getBytes(), StandardOpenOption.APPEND);
-                    Files.write(Paths.get(tableFilePath), tableRel.getBytes(), StandardOpenOption.APPEND);
+                /*try {
+                    Files.write(Paths.get(result_detail_update_path), updateSqlStr.getBytes(), StandardOpenOption.APPEND);
                 } catch (IOException e) {
                     log.error("追加内容时出错: ", e);
-                }
+                }*/
             }
         }
 
@@ -178,18 +150,14 @@ public class IndicatorExcelParser {
             writer.write("");
             if (order == -1) {
                 Files.write(Paths.get(orderFilePath), StrUtil.format(PostManJsonFormat.prefixFormat, "ga" + order).getBytes(), StandardOpenOption.APPEND);
-            }else {
+            } else {
                 return;
             }
-
-            // FileWriter writer = new FileWriter(orderFilePath);
-            // writer.write("");
             fileMap.put(order, true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
 
     public void invoke(ExcelData data) {
         // 如果当前行有指标编号，说明是新指标开始
@@ -198,7 +166,6 @@ public class IndicatorExcelParser {
             if (currentIndicator != null) {
                 result.add(currentIndicator);
             }
-
             // 创建新指标
             currentIndicator = new Indicator();
             currentIndicator.setIndicatorCode(data.getIndicatorCode());
@@ -206,21 +173,19 @@ public class IndicatorExcelParser {
             currentIndicator.setDataItems(new ArrayList<>());
         }
 
-        String dataItem = data.getDataItem();
         // 添加数据项到当前指标
-        if (currentIndicator != null && StrUtil.isNotBlank(dataItem) && !"/".equals(dataItem)) {
+        if (currentIndicator != null && StrUtil.isNotBlank(data.getDataItem()) && !"/".equals(data.getDataItem())) {
+            String dataItem = data.getDataItem().replace(" ", "");
             Indicator.DataItem item = new Indicator.DataItem();
 
             item.setDescription(dataItem);
             currentIndicator.getDataItems().add(item);
-
 
             if (ObjectUtil.isNotNull(itemMap.get(dataItem))) {
                 itemMap.put(dataItem, itemMap.get(dataItem) + 1);
             } else {
                 itemMap.put(dataItem, 1);
             }
-
         }
     }
 

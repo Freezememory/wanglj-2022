@@ -7,6 +7,9 @@ package com.wanglj.wanglj2022.jiangmenData;
  */
 public class PostManJsonFormat {
 
+    public static final String updateSqlFormat = "update indicator set  result_table = '{}' , detailed_table = '{}'  where indicator_name = '{}' and deleted =0;\n";
+    public static final String insertSqlFormat = "";
+
 
     public static final String prefixFormat = "{\n" +
             "\t\"info\": {\n" +
