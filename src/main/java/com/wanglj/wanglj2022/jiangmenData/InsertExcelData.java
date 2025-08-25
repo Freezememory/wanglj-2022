@@ -6,18 +6,22 @@ import lombok.extern.slf4j.Slf4j;
 
 @Data
 @Slf4j
-public class ExcelData {
+public class InsertExcelData {
     // 指标编号（第一列）
     @ExcelProperty("指标编号")
     private String indicatorCode;
-    
+
     // 指标名称（第二列）
     @ExcelProperty("指标")
     private String indicatorName;
-    
+
     // 数据项（第三列）
     @ExcelProperty("数据项")
     private String dataItem;
+
+    // 数据项（第四列）
+    @ExcelProperty("数据项是否存在")
+    private String itemExit;
 
     @ExcelProperty("单位")
     private String unti;

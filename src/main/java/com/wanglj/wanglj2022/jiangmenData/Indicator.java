@@ -15,6 +15,11 @@ public class Indicator {
     // 指标名称
     private String indicatorName;
 
+    /**
+     * 指标是否存在
+     */
+    private String indicatorExist;
+
     // 数据项列表（一对多关系）
     private List<DataItem> dataItems;
 
